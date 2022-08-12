@@ -1,15 +1,20 @@
+.container{
+  display: flex;
+  justify-content: center;
+}
 .column{
+  margin: 5px;
   cursor: default;
   padding: 10px;
   list-style: none;
   background: #ebecf0;
   border-radius: 5px;
+  width: 300px;
 
   &:hover &__delete{
     visibility: visible;
   }
   &__title{
-    position: relative;
     font-size: 20px;
     margin: 0 0 10px 0;
   }
@@ -18,7 +23,8 @@
     height: 10px;
   }
   &__delete{
-    position: absolute;
+    display: inline-block;
+    float: right;
     top: 0;
     right: 0;
     color: red;
@@ -50,16 +56,30 @@
     font-size: 20px;
     color: orangered;
     visibility: hidden;
+    border-color: transparent;
+    padding: 0;
   }
   &__deleteTask:hover{
     color: red;
     font-weight: bold;
   }
-
   &__add-task{
     cursor: pointer;
   }
-
+}
+.tasks__add{
+  cursor: pointer;
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 22px;
+  border-color: transparent;
+}
+.tasks{
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: left;
 }
 
 

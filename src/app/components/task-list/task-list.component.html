@@ -1,15 +1,23 @@
-<div class="column" *ngFor="let col of columns[0]">
-  <div  class="column__title" >{{col._title}}
-    <div  class="column__delete" *ngIf="columns.length > 3" (click)="deleteColumn()">X</div>
-  </div>
-
-  <ul class="column__list">
-      <div class="column__item" *ngFor="let task of col._tasks">
-        <div class="column__item-text" (click)="showDetailTask(task)">
-          {{task._title}}
-        </div>
-        <button class="column__deleteTask" (click)="deleteTask(task)">X</button>
+<div class="container">
+  <div class="tasks">
+    <div class="column" *ngFor="let col of columns, let i = index">
+      <div  class="column__title" >{{col._title}}
+        <div  class="column__delete" *ngIf="columns.length > 3 && i > 2" (click)="deleteColumn(col)">X</div>
       </div>
-  </ul>
-  <div class="column__add-task" (click)="addTask(col)">+ Добавить задачу</div>
+
+      <ul class="column__list">
+        <div class="column__item" *ngFor="let task of col._tasks">
+          <div class="column__item-text" (click)="showDetailTask(task)">
+            {{task._title}}
+          </div>
+          <button class="column__deleteTask" (click)="deleteTask(task)">X</button>
+        </div>
+      </ul>
+      <div class="column__add-task" (click)="addTask(col)">+ Добавить задачу</div>
+    </div>
+    <div>
+      <button class="tasks__add" (click)="createColumn()">+</button>
+    </div>
+  </div>
 </div>
+

@@ -1,15 +1,15 @@
-import {MessageModal} from "./message.modal";
+import {MessageModel} from "./message.model";
 
-export class TaskModal{
-  private id: string;
-  private _title: string;
-  private _deadline: string;
-  private _description: string;
-  private _messages: MessageModal[];
-  private _condition: string;
+export class TaskModel {
+  _id: string;
+  _title: string;
+  _deadline: string;
+  _description: string;
+  _messages: MessageModel[];
+  _condition: string;
 
-  constructor(title: string, deadline: string, description: string, messages: MessageModal[], condition: string) {
-    this.id = this.uuidv4();
+  constructor(title: string, deadline: string, description: string, messages: MessageModel[], condition: string, id?: string) {
+    this._id = id ? id : this.uuidv4();
     this.title = title;
     this.deadline = deadline;
     this.description = description;
@@ -21,6 +21,10 @@ export class TaskModal{
     return ("10000000-1000-4000-8000-100000000000").replace(/[018]/g, c =>
       (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
+  }
+
+  public get id(): string{
+    return this._id
   }
 
   public get title(): string{
@@ -44,10 +48,10 @@ export class TaskModal{
     this._description = value;
   }
 
-  public get messages(): MessageModal[]{
+  public get messages(): MessageModel[]{
     return this._messages;
   }
-  public set messages(value: MessageModal[]){
+  public set messages(value: MessageModel[]){
     this._messages = value;
   }
 

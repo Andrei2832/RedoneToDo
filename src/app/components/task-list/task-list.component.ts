@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LocalStorageService} from "../../services/local-storage.service";
-import {ColumnModal} from "../../models/column-task.modal";
-import {TaskModal} from "../../models/task.modal";
+import {ColumnModal} from "../../models/column-task.model";
+import {TaskModel} from "../../models/task.model";
 import {ModalService} from "../../services/modal.service";
-import {AddTaskComponent} from "../add-task/add-task.component";
 import {TaskService} from "../../services/task.service";
+import {AppComponent} from "../../app.component";
+import {ColumnService} from "../../services/column.service";
 
 
 @Component({
@@ -14,18 +15,17 @@ import {TaskService} from "../../services/task.service";
 })
 export class TaskListComponent implements OnInit {
 
-  public columns: any;
+  @Input() public columns: ColumnModal[];
 
   constructor(
     private localStorageService:LocalStorageService,
     private modalService: ModalService,
     private taskService: TaskService,
-  ) {
-    this.localStorageService.getDataLocalStorage()?.subscribe((event: ColumnModal[]) => this.columns = Object.values(event))
-  }
+    private appComponent: AppComponent,
+    private columnService: ColumnService,
+  ) {}
 
   public ngOnInit(): void {
-    // this.localStorageService.getDataLocalStorage().subscribe(event => this.columns = event)
   }
 
   public addTask(nowColumn: ColumnModal): void{
@@ -34,17 +34,32 @@ export class TaskListComponent implements OnInit {
     this.modalService.open();
   }
 
-  public showDetailTask(task: TaskModal): void{
-    // this.localStorageService.nowTask = task ;
-    // this.modalService.titleModal = '';
-    // this.modalService.open();
+  public showDetailTask(task: TaskModel): void{
+    this.taskService.nowTask = task;
+    this.modalService.titleModal = '';
+    this.modalService.open();
   }
 
-  public deleteColumn(): void{
-    // this.localStorageService.deleteColumn(this.task)
+  public deleteColumn(deleteColumn: ColumnModal): void{
+    let newColumns = this.columnService.deleteColumn(deleteColumn, this.columns)
+    this.localStorageService.setDataLocalStorage(newColumns)
+
+    if(!newColumns.map(item => !!item.tasks.length).includes(true)){
+      this.appComponent.UpdateData()
+    }
   }
 
-  public deleteTask(task: TaskModal): void{
-    // this.localStorageService.deleteTask(task)
+  public deleteTask(task: TaskModel): void{
+    let newColumns = this.taskService.deleteTask(task, this.columns);
+    this.localStorageService.setDataLocalStorage(newColumns)
+
+    if(!newColumns.map(item => !!item.tasks.length).includes(true)){
+      this.appComponent.UpdateData()
+    }
+  }
+
+  public createColumn(): void{
+    this.modalService.titleModal = 'Добавить колонку';
+    this.modalService.open();
   }
 }

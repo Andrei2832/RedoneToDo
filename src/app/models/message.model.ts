@@ -1,10 +1,10 @@
-export class MessageModal{
-  private id: string;
-  private _text: string;
-  private _date: string;
+export class MessageModel {
+  _id: string;
+  _text: string;
+  _date: string;
 
-  constructor(text: string, date: string) {
-    this.id = this.uuidv4();
+  constructor(text: string, date: string, id?: string) {
+    this._id = id ? id : this.uuidv4();
     this.text = text;
     this.date = date;
   }
@@ -15,6 +15,10 @@ export class MessageModal{
     );
   }
 
+  public get id(): string{
+    return this._id
+  }
+
   public get text(): string{
     return this._text;
   }
@@ -23,7 +27,7 @@ export class MessageModal{
   }
 
   public get date(): string{
-    return this._text;
+    return this._date;
   }
   public set date(value: string){
     this._date = value;

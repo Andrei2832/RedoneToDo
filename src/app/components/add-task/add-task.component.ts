@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {ModalService} from "../../services/modal.service";
-import {ColumnModal} from "../../models/column-task.modal";
+import {ColumnModal} from "../../models/column-task.model";
 import {TaskService} from "../../services/task.service";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-add-task',
@@ -10,6 +11,9 @@ import {TaskService} from "../../services/task.service";
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent implements OnInit {
+
+  @Input() public columns: ColumnModal[];
+
   form = new FormGroup({
     title: new FormControl<string>('')
   })
@@ -17,6 +21,7 @@ export class AddTaskComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private taskService: TaskService,
+    public localStorageService: LocalStorageService,
   ) {}
 
   public ngOnInit(): void {
@@ -27,9 +32,8 @@ export class AddTaskComponent implements OnInit {
 
   public createTask(textTask: any, deadline: any): void{
     if (textTask.value.trim() && deadline.value.trim()){
-      let newTask = this.taskService.addTask(textTask,deadline)
-      console.log(newTask)
-      // this.localStorageService.addTask(textTask.value,deadline.value);
+      let newTask = this.taskService.addTask(textTask.value,deadline.value, this.columns)
+      this.localStorageService.setDataLocalStorage(newTask)
       this.modalService.close();
     }
     if (!textTask.value.trim()){

@@ -1,0 +1,83 @@
+.detail{
+  cursor: default;
+  padding: 5px;
+  &__title{
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+  &__deadline{
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  &__description{
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  &__description-text{
+    text-align: left;
+    margin-bottom: 5px;
+    min-height: 90px;
+    height: auto;
+    width: 400px;
+    resize: none;
+    font-size: 16px;
+    border-radius: 5px;
+    border: solid 1px black;
+  }
+  &__condition-now{
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  &__condition-change{
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  &__container-select{
+    display: inline-block;
+
+  }
+  &__select{
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 14px;
+  }
+  &__select:hover {
+    background: whitesmoke;
+  }
+  &__comment-title{
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  &__text-comment{
+    margin-bottom: 3px;
+    width: 300px;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: solid 1px black;
+  }
+  &__add-comment{
+    cursor: pointer;
+    margin: 0 0 5px 5px;
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 3px;
+    font-size: 12px;
+  }
+  &__add-comment:hover {
+    background: whitesmoke;
+  }
+  &__comments{
+
+  }
+}
+.comment{
+  margin: 10px 0 0 0 ;
+}
+

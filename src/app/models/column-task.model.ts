@@ -1,12 +1,12 @@
-import {TaskModal} from "./task.modal";
+import {TaskModel} from "./task.model";
 
 export class ColumnModal{
-  private id: string;
-  private _title: string;
-  private _tasks: TaskModal[];
+  _id: string;
+  _title: string;
+  _tasks: TaskModel[];
 
-  constructor(title: string, tasks: TaskModal[]) {
-    this.id = this.uuidv4();
+  constructor(title: string, tasks: TaskModel[], id?: string) {
+    this._id = id ? id : this.uuidv4();
     this.title = title;
     this.tasks = tasks;
   }
@@ -16,6 +16,9 @@ export class ColumnModal{
       (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
   }
+  public get id(): string{
+    return this._id
+  }
 
   public get title(): string{
     return this._title;
@@ -24,10 +27,10 @@ export class ColumnModal{
     this._title = value;
   }
 
-  public get tasks(): TaskModal[]{
+  public get tasks(): TaskModel[]{
     return this._tasks;
   }
-  public set tasks(value: TaskModal[]){
+  public set tasks(value: TaskModel[]){
     this._tasks = value;
   }
 }

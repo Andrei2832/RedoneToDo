@@ -1,0 +1,30 @@
+.comment{
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding: 5px;
+
+  &:hover &__delete{
+    visibility: visible;
+  }
+
+  &__text{
+    font-size: 16px;
+    margin: 0;
+    word-wrap: anywhere;
+  }
+  &__date{
+    color: gray;
+    font-size: 12px;
+    margin: 0;
+  }
+  &__delete{
+    display: block;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: indianred;
+    font-size: 14px;
+    visibility: hidden;
+  }
+}

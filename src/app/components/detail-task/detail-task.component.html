@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="detail">
+    <h2 class="detail__title">{{task.title}}</h2>
+
+    <p class="detail__deadline"><b>Срок выполнения:</b> {{task.deadline}}</p>
+
+    <p class="detail__description"><b>Описание:</b></p>
+    <textarea #description class="detail__description-text" (change)="changeDescription(description.value)">
+    {{task.description}}
+    </textarea>
+
+    <p class="detail__condition-now"><b>Статус: </b> {{task.condition}}</p>
+    <p class="detail__condition-change"><b>Изменить статус:</b></p>
+    <div *ngFor="let d of columns " class="detail__container-select">
+      <button #condition class="detail__select" (click)="changeCondition(condition.textContent!)"
+              *ngIf="d.title !== task.condition">{{d.title}}</button>
+    </div>
+
+    <p class="detail__comment-title"><b>Комментарии:</b></p>
+    <input #textMes type="text" class="detail__text-comment">
+    <button class="detail__add-comment" (click)="addMessage(textMes.value); textMes.value = ''">Добавить</button>
+
+    <div class="comment" *ngFor="let message of task.messages">
+      <app-message [message]="message" [columns]="columns" ></app-message>
+    </div>
+
+  </div>
+</form>

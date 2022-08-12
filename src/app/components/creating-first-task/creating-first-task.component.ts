@@ -19,11 +19,21 @@ export class CreatingFirstTaskComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  public createFirstTask(task: string, deadline: string): void{
-    if (task && deadline){
-      let firstColumns = this.columnService.createFirstTask(task,deadline);
+  public createFirstTask(task: any, deadline: any): void{
+    if (task.value.trim() && deadline.value.trim()){
+      let firstColumns = this.columnService.createFirstTask(task.value,deadline.value);
       this.localStorageService.setDataLocalStorage(firstColumns)
-      this.appComponent.checkUpdate()
+      this.appComponent.UpdateData()
     }
+    if (!task.value.trim()){
+      task.classList.add('error')
+    }
+    if(!deadline.value.trim()){
+      deadline.classList.add('error')
+    }
+  }
+
+  public inputChange(Task: Element): void{
+    Task.classList.remove('error')
   }
 }
