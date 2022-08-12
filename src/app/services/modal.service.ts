@@ -10,10 +10,10 @@ export class ModalService {
 
   public isVisible$ = new BehaviorSubject<boolean>(false)
 
-  open(): void{
+  public open(): void{
     this.isVisible$.next(true)
   }
-  close(): void{
+  public close(): void{
     this.isVisible$.next(false)
   }
 }
